@@ -1,0 +1,255 @@
+html,
+body {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #2f2736;
+}
+
+body {
+  /* font-family: sans-serif; */
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 24px;
+  margin: 0px;
+  background-color: #51425d;
+}
+
+.main-content {
+  /* pointer-events: none; */
+  position: sticky;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.invisible {
+  opacity: 0;
+  visibility: visible;
+  /* visibility: hidden; */
+
+  pointer-events: none;
+}
+
+.top-layer {
+  z-index: 1;
+  pointer-events: all;
+}
+
+.bottom-layer {
+  z-index: -1;
+  pointer-events: all;
+}
+
+.app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.row-full {
+  /* width: 100%; */
+  height: 100vh;
+  pointer-events: none;
+}
+
+.col-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60%;
+}
+
+.col-double {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 60%;
+}
+
+.col-double p {
+  width: 50%;
+}
+
+#title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  flex-direction: column;
+  padding: 4em 0;
+}
+
+#title,
+#subtitle {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  color: #ece6f0;
+}
+
+#title {
+  font-size: 3em;
+  font-weight: 600;
+  line-height: 1.5em;
+  padding: 0;
+}
+
+#subtitle {
+  font-size: 2em;
+  font-weight: 400;
+  line-height: 1.25em;
+  /* padding: 0em; */
+  color: #ece6f0;
+}
+
+#footer {
+  background-color: #282130;
+  /* justify-content: flex-start; */
+  justify-content: center;
+  text-align: left;
+  color: #ece6f0;
+  flex-direction: column;
+  padding: 3em 0;
+  margin: 3em 0 0 0;
+  height: 12vh;
+}
+
+#footer {
+  font-size: 0.75em;
+  line-height: 1.25em;
+}
+
+#current-src {
+  background-color: #ece6f0;
+  background-color: #282130;
+  color: #f4fd75;
+
+  padding: 0.08em 0.24em;
+}
+
+p {
+  font-size: 1em;
+  color: #ece6f0;
+}
+
+.lowlight {
+  mix-blend-mode: difference;
+}
+
+#labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10; /* Make sure it's above the canvas */
+  font-family: sans-serif;
+}
+
+#labels > div {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.top-layer #labels {
+  z-index: 20;
+}
+
+#labels > div {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.css-label--label {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  font-weight: 500;
+  cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  filter: var(--css-label-brightness);
+  pointer-events: none;
+  background-color: red;
+  font-weight: 700;
+  border-radius: 6px;
+
+  transition: opacity 600ms;
+  opacity: 1;
+}
+
+#cosmos-01 {
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+}
+
+#cosmos-01-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.cosmos-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+
+#cosmos-01-canvas,
+#cosmos-02-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-container {
+  z-index: 20;
+  position: relative;
+  height: 720px;
+  width: 100%;
+  /* max-width: 800px; */
+  margin: 4em 0;
+  padding: 0;
+}
+
+#multiLineChartCanvas {
+  height: 100%;
+
+}

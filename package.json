@@ -1,0 +1,37 @@
+{
+  "name": "cosmos-point-labels",
+  "private": true,
+  "version": "0.0.0",
+  "description": "This example shows how to use the `trackPointPositionsByIndices` feature of Cosmos and implement point labels on top of it.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "parcel": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1"
+  },
+  "dependencies": {
+    "@cosmograph/cosmos": "^2.0.0-beta.17",
+    "@cubejs-client/core": "^0.31.0",
+    "@interacta/css-labels": "^0.1.1",
+    "@types/chart.js": "^2.9.41",
+    "chart.js": "^4.4.8",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
+    "d3": "^7.9.0",
+    "d3-scale-chromatic": "^3.1.0",
+    "date-fns": "^4.1.0",
+    "scrollama": "^3.2.0"
+  },
+  "keywords": [
+    "labels",
+    "cosmograph",
+    "graph",
+    "network",
+    "cosmos"
+  ]
+}

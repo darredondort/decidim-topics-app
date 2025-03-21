@@ -1,0 +1,8 @@
+.DS_Store
+**/.DS_Store
+modelos/
+archivo/
+dist/
+node_modules/
+node_modules
+.vercel
