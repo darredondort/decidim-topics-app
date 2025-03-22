@@ -2,22 +2,21 @@ import { Chart, ChartConfiguration, ChartTypeRegistry } from "chart.js/auto";
 import 'chartjs-adapter-date-fns';
 import { sentencesTime } from './sentences-time.ts';
 
-import { fixedColors } from "./data";
+import { fixedColors, assignedColors } from "./data";
 
 
 import { Tooltip } from 'chart.js';
 
+// Custom tooltip positioner (keep your existing implementation)
 Tooltip.positioners.myCustomPositioner = function(elements, eventPosition) {
-  // Your custom positioning logic here
-  return {
-    x: 0,
-    y: 0
-  };
+  return { x: 0, y: 0 };
 };
 
 
 // Ensure Chart.js uses instance mode
 Chart.defaults.plugins.tooltip = false;
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+
 
 interface RawDataPoint {
   Topic: number;
@@ -42,207 +41,6 @@ function parseData(data: RawDataPoint[]): ParsedDataPoint[] {
   }));
 }
 
-// function createMultiLineChart(canvasId: string) {
-//   const parsedData = parseData(sentencesTime);
-//   const topics = [...new Set(parsedData.map(item => item.topic))];
-//   const datasets = topics.map(topic => ({
-//     label: `Topic ${topic}`,
-//     data: parsedData.filter(item => item.topic === topic).map(item => ({
-//       x: item.timestamp,
-//       y: item.value
-//     })),
-//     fill: false,
-//     tension: 0.1
-//   }));
-
-//   const config: ChartConfiguration<'line', any, string> = {
-//     type: 'line',
-//     data: { datasets: datasets },
-
-
-
-
-// function createMultiLineChart(canvasId: string) {
-//   const parsedData = parseData(sentencesTime);
-//   const topics = [...new Set(parsedData.map(item => item.topic))];
-//   const datasets = topics.map(topic => ({
-//     label: `Topic ${topic}`,
-//     data: parsedData.filter(item => item.topic === topic).map(item => ({
-//       x: item.timestamp,
-//       y: item.value
-//     })),
-//     fill: false,
-//     tension: 0.1
-//   }));
-
-
-//   const config: ChartConfiguration<'line', any, string> = {
-//     type: 'line',
-//     data: { datasets: datasets },
-//     options: {
-//       responsive: true,
-//       scales: {
-//         x: {
-//           type: 'time',
-//           time: { unit: 'day' },
-//           title: { display: true, text: 'Date' }
-//         },
-//         y: {
-//           beginAtZero: true,
-//           title: { display: true, text: 'Frequency' }
-//         }
-//       },
-//       plugins: {
-//         tooltip: {
-//           position: 'nearest', // Use a valid default position
-//         },
-//         // tooltip: {
-//         //   callbacks: {
-//         //     label: (context) => {
-//         //       const dataPoint = parsedData.find(item => 
-//         //         item.timestamp.getTime() === context.parsed.x &&
-//         //         item.value === context.parsed.y
-//         //       );
-//         //       return dataPoint ? `${dataPoint.label}: ${dataPoint.value}` : '';
-//         //     }
-//         //   }
-//         // },
-//         legend: { position: 'top' }
-//       }
-//     }
-//   };
-
-//   // const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
-//   // const chart = new Chart(ctx, config);
-
-//   // function filterByTopic(topic: number) {
-//   //   chart.data.datasets = originalDatasets.filter(dataset => dataset.label === `Topic ${topic}`);
-//   //   chart.update();
-//   // }
-
-//   // function resetChart() {
-//   //   chart.data.datasets = originalDatasets;
-//   //   chart.update();
-//   // }
-//   // // return new Chart(ctx, config);
-//   // return { chart, filterByTopic, resetChart };
-
-//   // const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
-//   // const chart = new Chart(ctx, config);
-
-//   // // Store the original datasets
-//   // const originalDatasets = [...datasets];
-
-//   // function filterByTopic(topic: number) {
-//   //   chart.data.datasets = originalDatasets.filter(dataset => dataset.label === `Topic ${topic}`);
-//   //   chart.update();
-//   // }
-
-//   // function resetChart() {
-//   //   chart.data.datasets = originalDatasets;
-//   //   chart.update();
-//   // }
-
-//   // return { chart, filterByTopic, resetChart };
-
-//   const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
-//   const chart = new Chart(ctx, config);
-
-//   // Store the original datasets
-//   const originalDatasets = [...datasets];
-
-//   function filterByTopic(topic: number) {
-//     chart.data.datasets = originalDatasets.filter(dataset => {
-//       const datasetTopic = parseInt(dataset.label.split(' ')[1]);
-//       return datasetTopic === topic;
-//     });
-//     chart.update();
-//   }
-
-//   function resetChart() {
-//     chart.data.datasets = originalDatasets;
-//     chart.update();
-//   }
-
-//   return { chart, filterByTopic, resetChart };
-
-  
-// function createMultiLineChart(canvasId: string) {
-//   const parsedData = parseData(sentencesTime);
-//   const topics = [...new Set(parsedData.map(item => item.topic))];
-//   const datasets = topics.map(topic => ({
-//     label: `Topic ${topic}`,
-//     data: parsedData.filter(item => item.topic === topic).map(item => ({
-//       x: item.timestamp,
-//       y: item.value
-//     })),
-//     fill: false,
-//     tension: 0.1
-//   }));
-// function createMultiLineChart(canvasId: string) {
-//   const parsedData = parseData(sentencesTime);
-//   const topics = [...new Set(parsedData.map(item => item.topic))];
-  
-//   // Group data by topic
-//   const dataByTopic = topics.reduce((acc, topic) => {
-//     acc[topic] = parsedData.filter(item => item.topic === topic);
-//     return acc;
-//   }, {} as Record<number, ParsedDataPoint[]>);
-
-//   const datasets = Object.entries(dataByTopic).map(([topic, topicData]) => {
-//     const words = topicData[0].label; // Assuming the first word is representative
-//     return {
-//       label: `Topic ${topic}: ${words}`,
-//       data: topicData.map(item => ({
-//         x: item.timestamp,
-//         y: item.value
-//       })),
-//       fill: false,
-//       tension: 0.1
-//     };
-//   });
-
-//   // Calculate the min and max values for the y-axis
-//   const allValues = parsedData.map(item => item.value);
-//   const minY = Math.min(...allValues);
-//   const maxY = Math.max(...allValues);
-
-//   const config: ChartConfiguration<'line', any, string> = {
-//     type: 'line',
-//     data: { datasets: datasets },
-//     options: {
-//       responsive: true,
-//       scales: {
-//         x: {
-//           type: 'time',
-//           time: { unit: 'day' },
-//           title: { display: true, text: 'Date' }
-//         },
-//         y: {
-//           beginAtZero: true,
-//           min: minY,  // Set the minimum value
-//           max: maxY,  // Set the maximum value
-//           title: { display: true, text: 'Frequency' }
-//         }
-//       },
-//       plugins: {
-//         tooltip: {
-//           position: 'nearest',
-//         },
-//         legend: { position: 'top' }
-//       },
-//       onClick: (event, elements) => {
-//         if (elements.length === 0) {
-//           resetChart();
-//         }
-//       }
-//     }
-//   };
-
-//   const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
-
-
-
 
 
 function createMultiLineChart(canvasId: string) {
@@ -251,20 +49,22 @@ function createMultiLineChart(canvasId: string) {
 
   // Map topics to colors
   const topicColors = topics.reduce((acc, topic, index) => {
-    acc[topic] = fixedColors[index % fixedColors.length]; // Assign colors cyclically
+    acc[topic] = assignedColors[index % assignedColors.length];
     return acc;
   }, {} as Record<number, string>);
 
   const datasets = topics.map(topic => ({
-    label: `Topic ${topic + 1}: ${parsedData.find(item => item.topic === topic)?.label || ''}`,
+    // label: `Topic ${topic + 1}: ${parsedData.find(item => item.topic === topic)?.label || ''}`,
+    label: `${parsedData.find(item => item.topic === topic)?.label || ''}`,
     data: parsedData.filter(item => item.topic === topic).map(item => ({
       x: item.timestamp,
       y: item.value
     })),
-    borderColor: topicColors[topic], // Use mapped color for line border
-    backgroundColor: topicColors[topic], // Use mapped color for fill (if needed)
+    borderColor: topicColors[topic],
+    backgroundColor: topicColors[topic],
     fill: false,
-    tension: 0.1
+    tension: 0.1,
+    hidden: false // Add hidden state tracking
   }));
 
   const allValues = parsedData.map(item => item.value);
@@ -279,58 +79,116 @@ function createMultiLineChart(canvasId: string) {
       scales: {
         x: {
           type: 'time',
-          time: { unit: 'day' },
-          title: { display:true,text:'Date'}
-         },y:{beginAtZero:true,min:minY,max:maxY,title:{display:true,text:'Frequency'}}
-       },plugins:{tooltip:{position:'nearest'},legend:{position:'top'}}
-     }};
+          time: { unit: 'year' },
+          title: { 
+            display: true,
+            text: 'Year',
+            font: { 
+              size: 16,
+            },
+            // color: '#ece6f0' // Add title color
+            color: 'rgba(236, 230, 240, 0.5)' // Add title color
+          },
+          ticks: {
+            // color: '#ece6f0' // X-axis tick color
+            color: 'rgba(236, 230, 240, 0.5)' // X-axis tick color
+          }
+        },
+        y: {
+          beginAtZero: true,
+          min: minY,
+          max: maxY,
+          title: { 
+            display: true,
+            text: 'Related proposals',
+            font: { 
+              size: 16,
+            },
+            // color: '#ece6f0' // Add title color
+            color: 'rgba(236, 230, 240, 0.5)' // X-axis tick color
+          },
+          ticks: {
+            // color: '#ece6f0' // Y-axis tick color
+            color: 'rgba(236, 230, 240, 0.5)' // X-axis tick color
+          }
+        }
+      },
+      plugins: {
+        tooltip: {
+          position: 'nearest',
+          backgroundColor: 'rgba(40, 32, 48, 0.9)',
+          titleColor: '#ece6f0',
+          bodyColor: '#ece6f0',
+          callbacks: {
+            title: (context) => {
+              const date = new Date(context[0].parsed.x);
+              return date.toLocaleDateString();
+            },
+            label: (context) => {
+              const label = context.dataset.label || '';
+              const value = context.parsed.y;
+              return `${label}: ${value}`;
+            }
+          }
+        },
+        legend: {
+          display:true,
+          position: 'top',
+          labels: {
+            font: { 
+              size: 18,
+              family: "'DM Sans', sans-serif", // Ensure a readable font
+            },
+            boxWidth: 16,
+            // boxHeight: 8,
+            usePointStyle: true, // This can help with color visibility
+            generateLabels: (chart) => {
+              return chart.data.datasets.map((dataset, index) => ({
+                text: dataset.label || '',
+                fontColor: 'rgba(236, 230, 240, 1)',
+                fillStyle: dataset.borderColor as string,
+                hidden: !chart.getDatasetMeta(index).visible,
+                lineCap: 'round',
+                // lineWidth: 8,
+                strokeStyle: dataset.borderColor as string,
+                pointStyle: 'rect',
+                index: index
+              }));
+            }
+          },
+          onClick: (e,legendItem, legend) => {
+            const index = legendItem.index;
+            const chart = legend.chart;
+            const meta = chart.getDatasetMeta(index);
+            meta.hidden = meta.hidden === null ? !chart.data.datasets[index].hidden : null;
+            chart.update();
+          }
+        }
+      },
+      // Add click handler for resetting filters
+      onClick: (e, elements) => {
+        if (elements.length === 0) {
+          datasets.forEach((dataset, index) => {
+            const meta = chart.getDatasetMeta(index);
+            if (meta.hidden) {
+              meta.hidden = false;
+            }
+          });
+          chart.update();
+        }
+      }
+    }
+  };
 
-     const ctx=document.getElementById(canvasId);
-
+  const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
   const chart = new Chart(ctx, config);
 
-  // Store the original datasets
-  // const originalDatasets = [...datasets];
-
-  // function filterByTopic(topic: number) {
-  //   chart.data.datasets = originalDatasets.filter(dataset => {
-  //     const datasetTopic = parseInt(dataset.label.split(' ')[1]);
-  //     return datasetTopic === topic;
-  //   });
-  //   chart.update();
-  // }
-
-  // function filterByTopic(topic: number) {
-  //   chart.data.datasets.forEach(dataset => {
-  //     const datasetTopic = parseInt(dataset.label.split(':')[0].split(' ')[1]);
-  //     dataset.hidden = datasetTopic !== topic;
-  //   });
-  //   chart.update();
-  // }
-
+    // Filtering functions (keep your existing implementations)
+    const filterByTopic = (topic: number) => { /* ... */ };
+    const resetChart = () => { /* ... */ };
   
-  // function resetChart() {
-  //   chart.data.datasets = originalDatasets;
-  //   chart.update();
-  // }
+    return { chart, filterByTopic, resetChart };
 
-  function filterByTopic(topic: number) {
-    chart.data.datasets.forEach(dataset => {
-      const datasetTopic = parseInt(dataset.label.split(':')[0].split(' ')[1]);
-      dataset.hidden = datasetTopic !== topic;
-    });
-    chart.update();
-  }
-  
-  function resetChart() {
-    chart.data.datasets.forEach(dataset => {
-      dataset.hidden = false;
-    });
-    chart.update();
-  }
-  
-
-  return { chart, filterByTopic, resetChart };
 }
 
 

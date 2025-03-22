@@ -4,6 +4,7 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   background-color: #2f2736;
+  letter-spacing: 0.025em;
 }
 
 body {
@@ -80,14 +81,14 @@ canvas {
 
 .col-double {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   flex-direction: row;
   width: 60%;
 }
 
 .col-double p {
-  width: 50%;
+  width: 48%;
 }
 
 #title-container {
@@ -109,7 +110,7 @@ canvas {
 }
 
 #title {
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: 600;
   line-height: 1.5em;
   padding: 0;
@@ -136,7 +137,7 @@ canvas {
 }
 
 #footer {
-  font-size: 0.75em;
+  font-size: 0.5em;
   line-height: 1.25em;
 }
 
@@ -149,9 +150,46 @@ canvas {
 }
 
 p {
-  font-size: 1em;
+  font-size: 1.2em;
+  color: #ece6f0;
+  line-height: 1.5em;
+}
+
+a:link, a:visited {
+  color: #ece6f0;
+  text-decoration: underline;
+}
+
+a:hover, a:focus, a:active {
+  color: #f4fd75;
+}
+
+.text-high { 
+  color: #2f2736;
+  background: #ece6f0;
+}
+
+.text-high:-moz-selection { 
+  background: #2f2736;
   color: #ece6f0;
 }
+
+.text-high::selection {
+  background: #2f2736;
+  color: #ece6f0;
+}
+
+
+::-moz-selection { 
+  color: #2f2736;
+  background: #ece6f0;
+}
+
+::selection {
+  color: #2f2736;
+  background: #ece6f0;
+}
+
 
 .lowlight {
   mix-blend-mode: difference;
@@ -171,7 +209,8 @@ p {
 #labels > div {
   position: absolute;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(47, 39, 54, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
   color: white;
   padding: 2px 4px;
   border-radius: 3px;
@@ -245,7 +284,7 @@ p {
   height: 720px;
   width: 100%;
   /* max-width: 800px; */
-  margin: 4em 0;
+  margin: 2em 0 4em 0;
   padding: 0;
 }
 

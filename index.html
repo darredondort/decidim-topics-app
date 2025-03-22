@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>decidim cosmos explorer</title>
+    <title>Decidim Topic Modeller: Barcelona</title>
     <meta charset="UTF-8" />
 
 
@@ -14,34 +14,41 @@
       <section id="section-0">
         <div class="row row-full">
           <div class="col-center" id="title-container">
-            <h1 id="title">Tracing the discussion<br/>in <span id="current-src"></span></h1>.
-            <h2 id="subtitle">Open data from the platform:<br/><span id="current-location"></span></h1></h2>
+            <h1 id="title">Tracing common topics<br/>in proposals for <span id="current-src"></span></h1>.
+            <h2 id="subtitle">Open data from <span id="current-location"></span> (2016-2024)</h2>
           </div>
         </div>
       </section>
       <section id="section-1">
         <div class="row row-full">
+          <div class="col-center" id="title-container">
+            <p>
+              In 2016, the city of Barcelona launched an open participatory platform, <a href="https://www.decidim.barcelona/" target="_blank">decidim.barcelona</a>, to gather ideas and proposals from citizens, and decide upon their implementations.
+            </p>
+            <p>
+              Citizens responded immediately, and during its first year, it housed numerous acitivites, discussions and definitions, led by citizens, such as the Municipal Action Programme (PAM), which served as guidelines for shaping and taking care of the city the following years.
+            </p>
+          </div>
         </div>
       </section>
       <section id="section-2">
         <div class="row row-full">
           <div class="col-center" id="title-container">
-  
+            <p>
+              As people came together, both in the online platform and the offline activities it fostered, citizens ideas about their shared experience of the city were documented in Decidim proposals and comments.
+            </p>
+            <p>
+              After 8 years of collaboration and collective intelligence deposited on decidim.barcelona across hundreds of participatory processes, here are some of the most recurring topics that can be identified, using topic modelling techniques assited by machine learning and Catalan fine-tuned open language models.
+            </p>
           </div>
         </div>
       </section>
       <section id="section-3">
         <div class="row row-full">
           <div class="col-center" id="title-container">
-   
+            <h2 id="subtitle">The 20 most recurring topics in decidim.barcelona:</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-              pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
+              These colored clusters are composed by thousands of ideas written by citizens, grouped into similar topics by position and color. 
             </p>
             <div class="row">
         
@@ -53,9 +60,6 @@
         <div class="row row-full">
           <div class="col-center" id="title-container">
    
-            <p>
-              Explore:
-            </p>
             <div class="row">
             </div>
           </div>
@@ -66,53 +70,19 @@
              <div class="row">
         <div class="col-center">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            From the total 31,775 proposals published in the decidim.barcelona platform, <span class="text-high">these where the top 20 topics</span> which were most clearly identifiable and recurrent from their description texts:
           </p>
 
           <div class="chart-container">
             <canvas id="barChartCanvas"></canvas>
           </div>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            <span class="text-high">From 2016 to 2024,</span> this is how citizens' interests in these topics changed over time, as expressed by their presence in proposal descriptions:
           </p>
 
           <div class="chart-container">
             <canvas id="multiLineChartCanvas" height="720px"></canvas>
           </div>
-
-  
-          
-
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
         </div>
         
       </div>
@@ -121,8 +91,10 @@
       <section>
         <div id="footer" class="row">
           <div class="col-double">
-            <p>Created by Diego Arredondo Ortiz <br/>Visualized with Cosmos.</p>
-            <p>Based on open data from decidim instances <br/>and open source multilingual language models</p>
+            <p><strong>Created by <a href="https://www.linkedin.com/in/darredondort/" target="_blank">Diego Arredondo Ortiz</a></strong><br/>Visualized with <a href="https://github.com/cosmograph-org/cosmos" target="_blank">Cosmos</a> and <a href="https://www.chartjs.org/" target="_blank">Chart.js</a>.
+              <br/>Prototyped within the course <em>Data Analysis and Information Visualization Concerning Global Issues</em> within the Digital Culture and Emerging Media (DiCEM) programme at Universitat Pompeu Fabra. Barcelona, 2025.
+            </p>
+            <p>Based on open data from <a href="https://www.decidim.barcelona/" target="_blank">decidim.barcelona</a>, the <a href="https://maartengr.github.io/BERTopic/index.html" target="_blank">BERTopic library</a> by Maarten Grootendorst and the multilingual and Catalan fine-tuned open language model <a href="https://huggingface.co/projecte-aina/ST-NLI-ca_paraphrase-multilingual-mpnet-base" target="_blank">ST-NLI-ca_paraphrase-multilingual-mpnet-base</a>, published by the <a href="https://www.bsc.es/" target="_blank">BSC-CNS Barcelona Supercomputing Center</a></p>
           </div>
       </div>
       </section>
@@ -139,8 +111,5 @@
     
 
     <script type="module" src="/src/main.ts"></script>
-    <!-- <script type="module" src="/src/metadata-bar-chart.ts"></script> -->
-    <!-- <script type="module" src="/src/metadata-multiline.ts"></script> -->
-    <!-- <script type="module" src="/src/chart-01.ts"></script> -->
   </body>
 </html>

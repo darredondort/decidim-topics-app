@@ -1,5 +1,5 @@
 {
-  "name": "cosmos-point-labels",
+  "name": "decidim-topics-app",
   "private": true,
   "version": "0.0.0",
   "description": "This example shows how to use the `trackPointPositionsByIndices` feature of Cosmos and implement point labels on top of it.",

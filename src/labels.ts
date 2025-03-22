@@ -1,7 +1,6 @@
 // labels.ts
 
 
-
 import { LabelRenderer, LabelOptions } from "@interacta/css-labels";
 import { Graph } from "@cosmograph/cosmos";
 import { pointIndexToLabel, pointMetadata } from "./data";
@@ -26,15 +25,6 @@ export class CosmosLabels {
 
     this.labelRenderer = new LabelRenderer(div, {
       pointerEvents: "none",
-      // defaultLabelOptions: {
-      //   fontSize: "12px",
-      //   fontWeight: "bold",
-      //   color: "#FFFFFF",
-      //   backgroundColor: "rgba(0,0,0,0.5)",
-      //   padding: "3px 6px",
-      //   borderRadius: "2px",
-      //   textAlign: "center"
-      // }
     });
 
     // Find the canvas element

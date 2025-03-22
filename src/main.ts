@@ -32,29 +32,6 @@ import { CosmosLabels } from "./labels";
 const initialZoom = 0.75;
 let currentZoom = initialZoom;
 
-// let barChart: any;
-// let multiLineChart: any;
-
-// console.log("sentences")
-// console.log(sentences)
-// document.addEventListener('DOMContentLoaded', () => {
-//   createBarChart('barChartCanvas');
-//   createMultiLineChart('multiLineChartCanvas');
-// });
-// document.addEventListener('DOMContentLoaded', () => {
-//   const barChart = createBarChart('barChartCanvas');
-//   const { chart: multiLineChart, filterByTopic, resetChart } = createMultiLineChart('multiLineChartCanvas');
-
-//   document.addEventListener('topicSelected', (event: CustomEvent) => {
-//     const selectedTopic = event.detail;
-//     filterByTopic(selectedTopic);
-//   });
-
-//   const resetButton = document.getElementById('resetButton');
-//   if (resetButton) {
-//     resetButton.addEventListener('click', resetChart);
-//   }
-// });
 
 const barChart = createBarChart('barChartCanvas');
 const { chart: multiLineChart, filterByTopic, resetChart } = createMultiLineChart('multiLineChartCanvas');
@@ -85,12 +62,12 @@ export const config: GraphConfigInterface = {
   spaceSize: cosmosSpaceSize, // Use the same space size as in data normalization
   disableSimulation: false,
   // simulationGravity: 0.02,
-  simulationGravity: 0.02,
-  simulationLinkDistance: 300,
+  simulationGravity: 0.03,
+  simulationLinkDistance: 240,
   // simulationLinkDistance: 500,
   simulationLinkSpring: 1,
   // simulationRepulsion: 0.2,
-  simulationRepulsion: 0.5,
+  simulationRepulsion: 1.25,
   simulationRepulsionTheta: 1.5,
   simulationFriction: 1.5,
   simulationDecay: 10000,
@@ -142,7 +119,7 @@ const steps = [
 scroller
   .setup({
     step: steps,
-    offset: 0.5,
+    offset: 0.75,
     debug: false,
   })
   .onStepEnter(handleStepEnter)
@@ -192,6 +169,8 @@ function handleStepEnter({ index, direction }) {
       linkWidth: 0.1,
       linkColor: linkColorsLow,
     });
+    graph.setPointPositions(new Float32Array(pointPositions));
+
 
     currentZoom = initialZoom;
     graph.setZoomLevel(currentZoom, 500);
@@ -226,12 +205,14 @@ function handleStepEnter({ index, direction }) {
     
 
     // Update content visibility
-    mainContent.classList.add("invisible");
-    mainContent.classList.add("bottom-layer");
-    mainContent.classList.remove("visible");
-    mainContent.classList.remove("top-layer");
-    canvas.classList.add("top-layer");
-    canvas.classList.remove("bottom-layer");
+    mainContent.classList.add("visible");
+    mainContent.classList.add("top-layer");
+    mainContent.classList.remove("invisible");
+    mainContent.classList.remove("bottom-layer");
+    canvas.classList.add("bottom-layer");
+    canvas.classList.remove("top-layer");
+
+  
 
     // Update as the transition happens
     cosmosLabels.setVisible(true);
@@ -264,17 +245,19 @@ function handleStepEnter({ index, direction }) {
       simulationDecay: 5000,
     });
     graph.setPointColors(new Float32Array(pointColorsBicolor));
+    // graph.setPointColors(new Float32Array(pointColors));
+
 
     currentZoom = 0.5;
     graph.setZoomLevel(currentZoom, 500);
 
     // Update content visibility
-    mainContent.classList.add("invisible");
-    mainContent.classList.add("bottom-layer");
-    mainContent.classList.remove("visible");
-    mainContent.classList.remove("top-layer");
-    canvas.classList.add("top-layer");
-    canvas.classList.remove("bottom-layer");
+    mainContent.classList.add("visible");
+    mainContent.classList.add("top-layer");
+    mainContent.classList.remove("invisible");
+    mainContent.classList.remove("bottom-layer");
+    canvas.classList.remove("top-layer");
+    canvas.classList.add("bottom-layer");
 
     // Set labels visible and update continuously during transition
     cosmosLabels.setVisible(true);
@@ -301,7 +284,6 @@ function handleStepEnter({ index, direction }) {
 
   if (index === 3) {
     // Fixed positions view
-    graph.setPointPositions(new Float32Array(pointPositions));
     graph.setConfig({
       disableSimulation: true, // Use fixed positions
       simulationDecay: 0, // Immediate stop
@@ -310,6 +292,7 @@ function handleStepEnter({ index, direction }) {
       enableDrag: false,
     });
     // Colors by cluster
+    graph.setPointPositions(new Float32Array(pointPositions));
     graph.setPointColors(new Float32Array(pointColors));
     graph.setPointSizes(new Float32Array(pointSizesEmbeddings));
 
@@ -390,13 +373,13 @@ function handleStepEnter({ index, direction }) {
       linkWidth: 0.0,
       linkColor: linkColorsDisabled,
       disableSimulation: false,
-      simulationDecay: 10000,
+      simulationDecay: 1000,
     });
     graph.setPointColors(new Float32Array(pointColorsBicolor));
 
 
-    currentZoom = 7;
-    graph.setZoomLevel(currentZoom, 500);
+    currentZoom = 5;
+    graph.setZoomLevel(currentZoom, 2000);
 
     // Update content visibility
     mainContent.classList.add("visible");
@@ -415,9 +398,11 @@ function handleStepEnter({ index, direction }) {
     // Wait for zoom transition to complete
     setTimeout(() => {
       ensureTopicNodesTracked();
-      cosmosLabels.setVisible(true);
-      cosmosLabels.update(graph, true); // Force update
-      cosmosLabels.labelRenderer.draw(true);
+      cosmosLabels.setVisible(false);
+      cosmosLabels.update(graph, false); // Force update
+      cosmosLabels.labelRenderer.draw(false);
+      cosmosLabels.clearLabels();
+
     }, 600);
   }
 
@@ -448,44 +433,7 @@ function handleStepExit({ index, direction }) {
   steps[index].classList.remove("is-active");
   if (index === 3 && index === 4) {
     graph.setConfig({
-      // linkWidth: 0.4,
-      // linkColor: linkColorsHigh,
-      disableSimulation: false,
-      simulationDecay: 5000,
     });
-
-    // currentZoom = 1.5;
-    // graph.setZoomLevel(currentZoom, 500);
-
-    // Update content visibility
-    // mainContent.classList.add("invisible");
-    // mainContent.classList.add("bottom-layer");
-    // mainContent.classList.remove("visible");
-    // mainContent.classList.remove("top-layer");
-    // canvas.classList.add("top-layer");
-    // canvas.classList.remove("bottom-layer");
-
-    // Set labels visible and update continuously during transition
-    // cosmosLabels.setVisible(true);
-
-    // Force render to update the graph
-    // graph.render();
-
-    // Schedule updates during transition
-    // const transitionDuration = 500;
-    // const updateInterval = 100;
-
-    // for (let time = 0; time <= transitionDuration; time += updateInterval) {
-    //   setTimeout(() => {
-    //     cosmosLabels.update(graph, true);
-    //   }, time);
-    // }
-
-    // Final update after transition
-    // setTimeout(() => {
-    //   ensureTopicNodesTracked();
-    //   cosmosLabels.update(graph, true);
-    // }, transitionDuration + 100);
   }
 }
 
