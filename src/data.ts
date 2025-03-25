@@ -97,6 +97,7 @@ const pointLabelToIndex = new Map<string, number>();
 const pointIndexToLabel = new Map<number, string>();
 const pointPositions: number[] = [];
 const pointColorsBicolor: number[] = [];
+const pointColorsBicolorLow: number[] = [];
 // const pointSizes: number[] = [];
 const pointSizesGraph: number[] = [];
 const pointSizesEmbeddings: number[] = [];
@@ -112,11 +113,14 @@ sentences.forEach((p, index) => {
   pointMetadata.push(p || {});
 
   // Use scaled coordinates for point positions
-  pointPositions.push(scaledX[index], scaledY[index]);
+  pointPositions.push(scaledX[index] + cosmosSpaceSize/2, scaledY[index]);
 
   // Set colors based on whether the point is a topic or text
   const [r, g, b] = p.type === "topic" ? TOPIC_COLOR : TEXT_COLOR;
   pointColorsBicolor.push(r, g, b, 0.7);
+  pointColorsBicolorLow.push(r, g, b, 0.25);
+
+  
 
   // const [lr, lg, lb, la] = LINK_COLOR_HIGH;
   // linkColorsHigh.push(lr, lg, lb, la);
@@ -293,6 +297,7 @@ export {
   pointPositions,
   pointColors,
   pointColorsBicolor,
+  pointColorsBicolorLow,
   linkColorsHigh,
   linkColorsLow,
   linkColorsDisabled,

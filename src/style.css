@@ -153,6 +153,7 @@ p {
   font-size: 1.2em;
   color: #ece6f0;
   line-height: 1.5em;
+  width: 100%;
 }
 
 a:link, a:visited {
@@ -211,7 +212,7 @@ a:hover, a:focus, a:active {
   transform: translate(-50%, -50%);
   background-color: rgba(47, 39, 54, 0.5);
   /* background-color: rgba(0, 0, 0, 0.5); */
-  color: white;
+  color: ece6f0;
   padding: 2px 4px;
   border-radius: 3px;
   font-size: 12px;
@@ -292,3 +293,46 @@ a:hover, a:focus, a:active {
   height: 100%;
 
 }
+
+#bubbleChartCanvas {
+  height: 720px;
+  width: 100%;
+
+}
+
+
+#metadata-modal-container {
+  width: 100%;
+  pointer-events: none;
+}
+#metadata-modal {
+  display: block;
+  position: fixed;
+  top: 6vh;
+  background-color: rgba(47, 39, 54, 0.5);
+  width: 40vw;
+  height: auto;
+  z-index: 30;
+  font-size: 0.6em;
+  color: #2f2736;
+  background: rgba(236, 230, 240, 0.85);
+  border-radius: 16px;
+  padding: 1em;
+  
+}
+
+
+#metadata-topic {
+  font-weight: 600;
+  font-style: italic;
+}
+
+#metadata-title {
+  font-weight: 400;
+}
+
+#metadata-description {
+  font-weight: normal;
+  font-style: italic;
+}
+

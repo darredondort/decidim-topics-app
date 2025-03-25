@@ -72,7 +72,7 @@
           <p>
             From the total 31,775 proposals published in the decidim.barcelona platform, <span class="text-high">these where the top 20 topics</span> which were most clearly identifiable and recurrent from their description texts:
           </p>
-
+          
           <div class="chart-container">
             <canvas id="barChartCanvas"></canvas>
           </div>
@@ -82,6 +82,13 @@
 
           <div class="chart-container">
             <canvas id="multiLineChartCanvas" height="720px"></canvas>
+          </div>
+
+          <p>
+            <span class="text-high">Most supported proposals</span> each year and their topics:
+          </p>
+          <div class="chart-container">
+            <canvas id="bubbleChartCanvas" height="720px"></canvas>
           </div>
         </div>
         
@@ -101,6 +108,18 @@
  
     </div>
 
+    <div id="metadata-modal-container" class="row invisible">
+      <div class="col-center">
+        <div id="metadata-modal">
+          <span id="metadata-topic">Hover the points to read proposal contents...</span> <br/>
+          <span id="metadata-title"></span> <br/>
+          <span id="metadata-description"></span>
+
+          
+        </div>
+      </div>
+    </div>
+
 
      <div id="cosmos-01-container" class="row">
         <div id="cosmos-01" class="app">
@@ -108,6 +127,7 @@
           <canvas id="cosmos-01-canvas"></canvas>
         </div>
       </div>
+      
     
 
     <script type="module" src="/src/main.ts"></script>

@@ -14,7 +14,7 @@ Tooltip.positioners.myCustomPositioner = function(elements, eventPosition) {
 
 
 // Ensure Chart.js uses instance mode
-Chart.defaults.plugins.tooltip = false;
+// Chart.defaults.plugins.tooltip = false;
 Chart.defaults.font.family = "'DM Sans', sans-serif";
 
 

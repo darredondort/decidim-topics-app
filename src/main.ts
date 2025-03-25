@@ -6,25 +6,26 @@ import scrollama from "scrollama";
 
 import { createBarChart } from './metadata-bar-chart.ts';
 import { createMultiLineChart } from './metadata-multiline.ts';
+import { createBubbleChart } from './metadata-bubble-chart.ts';
 
 
 import {
   pointPositions,
   pointColors,
   pointColorsBicolor,
-  // pointSizes,
+  pointColorsBicolorLow,
   pointSizesGraph,
   pointSizesEmbeddings,
   pointLabelToIndex,
   links,
-  pointIndexToLabel,
+  // pointIndexToLabel,
   linkColorsHigh,
   linkColorsLow,
   linkColorsDisabled,
   pointMetadata,
   sentences,
   cosmosSpaceSize, // Import the space size
-  fixedColors,
+  // fixedColors,
 } from "./data";
 
 import { CosmosLabels } from "./labels";
@@ -35,6 +36,7 @@ let currentZoom = initialZoom;
 
 const barChart = createBarChart('barChartCanvas');
 const { chart: multiLineChart, filterByTopic, resetChart } = createMultiLineChart('multiLineChartCanvas');
+const bubbleChart = createBubbleChart('bubbleChartCanvas');
 
 document.addEventListener('topicSelected', (event: CustomEvent) => {
   const selectedTopic = event.detail;
@@ -100,6 +102,37 @@ currentSourceContainer.html(currentLocationLabel);
 
 const currentLocationContainer = select("#current-location");
 currentLocationContainer.html(currentSourceLabel);
+
+// const metadataDiv = select("#metadata-modal-container");
+const metadataDiv = document.querySelector("#metadata-modal-container") as HTMLDivElement;
+const metadataDivTopic = document.querySelector("#metadata-topic") as HTMLElement;
+const metadataDivTitle = document.querySelector("#metadata-title") as HTMLElement;
+const metadataDivDescription = document.querySelector("#metadata-description") as HTMLElement;
+
+
+
+
+// // Add this before scrollama setup
+
+// // Metadata display elements
+// const metadataDiv = document.createElement("div");
+// metadataDiv.style.cssText = `
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   background-color: rgba(0, 0, 0, 0.8);
+//   color: white;
+//   padding: 20px;
+//   border-radius: 5px;
+//   z-index: 1000;
+//   display: none; /* Initially hidden */
+//   pointer-events: none; /* Allow interaction with elements behind it */
+// `;
+// document.body.appendChild(metadataDiv);
+
+
+
 
 // Scrollama setup
 const scroller = scrollama();
@@ -189,6 +222,11 @@ function handleStepEnter({ index, direction }) {
 
     // Force a final render
     graph.render();
+    metadataDiv.classList.add("invisible");
+  } else if ( index === 0 && direction == "up") {
+
+    currentZoom = 5;
+    graph.setZoomLevel(currentZoom, 500);
   }
 
   if (index === 1) {
@@ -235,6 +273,9 @@ function handleStepEnter({ index, direction }) {
       ensureTopicNodesTracked();
       cosmosLabels.update(graph, true);
     }, transitionDuration + 100);
+    // metadataDiv.style.display = "none";
+    metadataDiv.classList.add("invisible");
+
   }
 
   if (index === 2) {
@@ -280,6 +321,9 @@ function handleStepEnter({ index, direction }) {
       ensureTopicNodesTracked();
       cosmosLabels.update(graph, true);
     }, transitionDuration + 100);
+    // metadataDiv.style.display = "none";
+    metadataDiv.classList.add("invisible");
+
   }
 
   if (index === 3) {
@@ -324,6 +368,8 @@ function handleStepEnter({ index, direction }) {
 
     // zoom to node at the center 
     graph.zoomToPointByIndex(sentences.length-20, 800, 0.1, false)
+    // metadataDiv.style.display = "none";
+    metadataDiv.classList.add("invisible");
 
   }
 
@@ -366,6 +412,10 @@ function handleStepEnter({ index, direction }) {
       cosmosLabels.update(graph, true); // Force update
       cosmosLabels.labelRenderer.draw(true);
     }, 600);
+    metadataDiv.classList.add("visible");
+    metadataDiv.classList.remove("invisible");
+
+    // metadataDiv.style.display = "block";
   }
 
   if (index === 5) {
@@ -373,9 +423,9 @@ function handleStepEnter({ index, direction }) {
       linkWidth: 0.0,
       linkColor: linkColorsDisabled,
       disableSimulation: false,
-      simulationDecay: 1000,
+      simulationDecay: 10000,
     });
-    graph.setPointColors(new Float32Array(pointColorsBicolor));
+    graph.setPointColors(new Float32Array(pointColorsBicolorLow));
 
 
     currentZoom = 5;
@@ -404,6 +454,10 @@ function handleStepEnter({ index, direction }) {
       cosmosLabels.clearLabels();
 
     }, 600);
+
+    // metadataDiv.style.display = "none";
+    metadataDiv.classList.add("invisible");
+    metadataDiv.classList.remove("visible");
   }
 
   steps[index].classList.add("is-active");
@@ -431,10 +485,15 @@ function handleStepEnter({ index, direction }) {
 function handleStepExit({ index, direction }) {
   console.log(`Exiting step ${index}, direction: ${direction}`);
   steps[index].classList.remove("is-active");
-  if (index === 3 && index === 4) {
-    graph.setConfig({
-    });
-  }
+  // if (index === 3 && index === 4) {
+  //   graph.setConfig({
+  //   });
+  // }
+
+  // if (index === 4) {
+  //    // Hide the metadata div
+  //     // metadataDiv.style.display = "none";
+  // }
 }
 
 window.addEventListener("resize", scroller.resize);
@@ -637,9 +696,28 @@ function handleCanvasHover(event: MouseEvent) {
       const nodeType = metadata?.type || "unknown";
       console.log(`Hovered over ${nodeType} node`);
       console.log("Node metadata:", metadata || "No metadata available");
+
+
+      let metadataDate: Date | undefined; // Declare it as a Date or undefined
+      let formattedDate: String | undefined; // Declare it as a Date or undefined
+      if (metadata.timestamp) {
+        metadataDate = new Date(metadata.timestamp); // Assign a Date object if timestamp exists
+        let options = { year: 'numeric', month: 'long', day: 'numeric' };
+        formattedDate = metadataDate.toLocaleDateString('en-US', options);
+
+      }
+
+
+      metadataDivTopic.innerHTML = `${metadata.topic_label_str}:`;
+      metadataDivTitle.innerHTML = `Process: ${metadata.process} (${formattedDate})<br/>`;
+      metadataDivDescription.innerHTML = metadata.label;
     }
   } else {
     hoveredNodeIndex = undefined;
+
+    metadataDivTopic.innerHTML = "Hover the points to read proposal contents..";
+    metadataDivTitle.innerHTML = "";
+    metadataDivDescription.innerHTML = "";
   }
 
   cosmosLabels.update(graph);

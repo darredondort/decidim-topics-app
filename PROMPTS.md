@@ -1373,3 +1373,9 @@ Please check the current version of the code and explain what  to change for the
 
 ### Perplexity AI:
 Propose and strategy to that the have the same colors assigned to each topic from the fixedColors array imported from data.ts
+
+
+### Perplexity AI:
+This current version of the main.ts code can print node metadata on hover. Please write the simplest code possible for creating a fixed div on the screen center which is displayed and populated with the current node metadata when hovering over them and hides this div element when the mouse is out. this should happen only on  step 4, during the rest of steps this element is not visible nor listening to hover for being populated with metadata.
+
+Please give me just the code blocks that need to be changed and where
