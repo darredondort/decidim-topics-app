@@ -1379,3 +1379,12 @@ Propose and strategy to that the have the same colors assigned to each topic fro
 This current version of the main.ts code can print node metadata on hover. Please write the simplest code possible for creating a fixed div on the screen center which is displayed and populated with the current node metadata when hovering over them and hides this div element when the mouse is out. this should happen only on  step 4, during the rest of steps this element is not visible nor listening to hover for being populated with metadata.
 
 Please give me just the code blocks that need to be changed and where
+
+
+
+### Perplexity AI:
+Examine this current version of these main.ts, index.html and style.css files. Please propose the simplest strategy possible to add CSS animations for applying a fade-in effect on the opacity and subtle vertical position animation of the divs inside each section, evaluating if the scrollama direction variable is "up" or "down", to associate them to the corresponding CSS animation-direction.
+
+Write the sugested code blocks and where they should be integrated in the current code.
+
+Additionally, if you find any blatant coding errors, list them, only if they are crucial or really simple to fix.

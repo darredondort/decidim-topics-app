@@ -278,7 +278,15 @@ function handleStepEnter({ index, direction }) {
 
   }
 
+  
+
   if (index === 2) {
+
+    if (direction == "up") {
+      currentZoom = 1.5;
+    } else {
+      currentZoom = 0.5;
+    }
     graph.setConfig({
       linkWidth: 0.4,
       linkColor: linkColorsHigh,
@@ -382,6 +390,10 @@ function handleStepEnter({ index, direction }) {
       linkColor: linkColorsDisabled,
       enableDrag: false,
     });
+
+    if (direction == "up") {
+      graph.zoomToPointByIndex(sentences.length-20, 800, 0.1, false)
+    }
     // Colors by cluster
     graph.setPointColors(new Float32Array(pointColors));
 
@@ -428,8 +440,8 @@ function handleStepEnter({ index, direction }) {
     graph.setPointColors(new Float32Array(pointColorsBicolorLow));
 
 
-    currentZoom = 5;
-    graph.setZoomLevel(currentZoom, 2000);
+    currentZoom = 3.2;
+    graph.setZoomLevel(currentZoom, 1000);
 
     // Update content visibility
     mainContent.classList.add("visible");
@@ -715,7 +727,7 @@ function handleCanvasHover(event: MouseEvent) {
   } else {
     hoveredNodeIndex = undefined;
 
-    metadataDivTopic.innerHTML = "Hover the points to read proposal contents..";
+    metadataDivTopic.innerHTML = "Hover over the points to read proposal contents..";
     metadataDivTitle.innerHTML = "";
     metadataDivDescription.innerHTML = "";
   }

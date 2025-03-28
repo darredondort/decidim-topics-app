@@ -141,8 +141,11 @@ sentences.forEach((p, index) => {
   // graph node sizes
   const isTopic = p.type === "topic";
   const scaleParamsGraph = isTopic
-    ? { scale: 0.8, min: minSizeTopic, max: maxSizeTopic }
-    : { scale: 1, min: minSizeDoc*2, max: maxSizeDoc*2 };
+    // ? { scale: 0.8, min: minSizeTopic, max: maxSizeTopic }
+    // : { scale: 1, min: minSizeDoc*2, max: maxSizeDoc*2 };
+
+    ? { scale: 1, min: minSizeTopic, max: maxSizeTopic }
+    : { scale: 10, min: minSizeDoc*2, max: maxSizeDoc*2 };
 
   const rawValueGraph = Number(p.value);
 
@@ -156,8 +159,8 @@ sentences.forEach((p, index) => {
 
     // embedding node sizes
     const scaleParamsEmbeddings = isTopic
-      ? { scale: 0.8, min: minSizeTopic, max: maxSizeTopic }
-      : { scale: 0.1, min: minSizeDoc, max: maxSizeDoc };
+      ? { scale: 1, min: minSizeTopic, max: maxSizeTopic }
+      : { scale: 1, min: minSizeDoc, max: maxSizeDoc };
   
     const rawValueEmbeddings = Number(p.value);
   
